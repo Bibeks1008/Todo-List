@@ -1,7 +1,7 @@
-import TodoListContextProvider from "../Context/Context";
+import TodoListContextProvider from "./Context/Context";
 
 import "./styles.css";
-import TodoList from "./TodoList/TodoList";
+import TodoList from "./Components/TodoList/TodoList";
 
 export default function App() {
   return (

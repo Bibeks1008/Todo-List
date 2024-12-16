@@ -1,0 +1,131 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: whitesmoke;
+  color: rgb(81, 64, 64);
+  width: 70%;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.todo-list {
+  margin-left: 85px;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  width: 700px;
+  justify-content: space-between;
+}
+
+.add-task button {
+  width: 90px;
+  height: 40px;
+  border-radius: 10px;
+  background: hsl(200, 100%, 50%);
+  border: 1px solid hsl(200, 100%, 50%);
+  color: whitesmoke;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  width: 90px;
+  height: 40px;
+  text-align: center;
+  background: rgb(182, 180, 180);
+  outline: none;
+  border: 1px solid rgb(182, 180, 180);
+  border-radius: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+
+  background-color: #f1f1f1;
+  min-width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content button {
+  color: black;
+  padding: 12px 16px;
+  width: 90px;
+  height: 30px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content button:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: rgb(223, 221, 221);
+}
+
+.new-item-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  gap: 0.5rem;
+  padding-top: 20px;
+}
+
+.new-item-form.collapse {
+  display: none;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.btn {
+  background: hsl(200, 100%, 50%, 0.1);
+  border: 1px solid hsl(200, 100%, 50%);
+  color: hsl(200, 100%, 50%);
+  padding: 0.25em 0.5em;
+  border-radius: 0.25em;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: hsl(200, 100%, 50%, 0.2);
+}
+
+.new-item-form input {
+  outline: none;
+  border: 1px solid hsl(200, 100%, 40%);
+  background: hsl(200, 98%, 78%);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  color: hsl(200, 97%, 11%);
+}
+
+.new-item-form input:focus {
+  border: 1px solid hsl(200, 93%, 89%);
+}
+
+.header {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
