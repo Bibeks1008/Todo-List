@@ -3,16 +3,29 @@ import { TodoListContext } from "../../Context/Context";
 import "./TodoItems.css";
 import trash_icon from "../Icons/trash_icon.png";
 import edit_icon from "../Icons/edit_icon.png";
+import { TodoListType } from "../../Context/Context";
 
-export default function TodoItems({ filteredList, category }) {
-  const { todoList, setTodoList } = useContext(TodoListContext);
-  const [editing, setEditing] = useState(null);
+type TodoItemsProp = {
+  filteredList: TodoListType[];
+  category: string;
+};
 
-  function handleDelete(id) {
+export default function TodoItems(props: TodoItemsProp) {
+  const { filteredList, category } = props;
+  const todoListContext = useContext(TodoListContext);
+
+  if (!todoListContext) {
+    throw new Error("Context value must be used within a ContextProvider");
+  }
+
+  const { todoList, setTodoList } = todoListContext;
+  const [editing, setEditing] = useState<number | null>(null);
+
+  function handleDelete(id: number) {
     setTodoList(todoList.filter((data) => data.id !== id));
   }
 
-  function handleToggle(id) {
+  function handleToggle(id: number) {
     setTodoList(
       todoList.map((data) => {
         if (data.id === id) {
@@ -24,7 +37,7 @@ export default function TodoItems({ filteredList, category }) {
     );
   }
 
-  function handleChange(e, id) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>, id: number) {
     setTodoList(
       todoList.map((data) => {
         if (data.id === id) {
@@ -57,7 +70,7 @@ export default function TodoItems({ filteredList, category }) {
                   <input
                     type="checkbox"
                     onClick={() => handleToggle(todo.id)}
-                    checked={todo.completed === true ? "checked" : ""}
+                    checked={todo.completed === true ? true : false}
                   />{" "}
                 </label>
                 <div className="todo-value">
@@ -79,29 +92,24 @@ export default function TodoItems({ filteredList, category }) {
                   <div className="date">{todo.date}</div>
                 </div>
 
-                {/* <button
-                  className="btn btn-danger"
-                  onClick={() => handleDelete(todo.id)}
-                > */}
-                <div className="buttons">
-                  <div className="btn btn-danger">
-                    <img
-                      src={trash_icon}
-                      alt=""
-                      // className="btn btn-danger"
-                      onClick={() => handleDelete(todo.id)}
-                    />
+                {
+                  <div className="buttons">
+                    <div className="btn btn-danger">
+                      <img
+                        src={trash_icon}
+                        alt=""
+                        onClick={() => handleDelete(todo.id)}
+                      />
+                    </div>
+                    <div className="btn btn-danger">
+                      <img
+                        src={edit_icon}
+                        alt=""
+                        onClick={() => setEditing(todo.id)}
+                      />
+                    </div>
                   </div>
-                  <div className="btn btn-danger">
-                    <img
-                      src={edit_icon}
-                      alt=""
-                      // className="btn btn-danger"
-                      onClick={() => setEditing(todo.id)}
-                    />
-                  </div>
-                </div>
-                {/* </button> */}
+                }
               </li>
             );
           })}

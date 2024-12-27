@@ -2,15 +2,22 @@ import { useState, useContext } from "react";
 import "./TodoList.css";
 import { TodoListContext } from "../../Context/Context";
 import TodoItems from "../TodoItems/TodoItems";
+import { TodoListType } from "../../Context/Context";
 
 export default function TodoList() {
   const [newTodo, setNewTodo] = useState("");
-  const { todoList, setTodoList } = useContext(TodoListContext);
+  const todoListContext = useContext(TodoListContext);
+
+  if (!todoListContext) {
+    throw new Error("Context value must be used within a ContextProvider");
+  }
+
+  const { todoList, setTodoList } = todoListContext;
 
   const [displayAddTask, setDisplayAddTask] = useState(false);
   const [category, setCategory] = useState("All");
 
-  function handleSubmit(event) {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     if (newTodo != "") {
       setTodoList((prevList) => {
@@ -28,9 +35,9 @@ export default function TodoList() {
       setNewTodo("");
       setDisplayAddTask(false);
     }
-  }
+  };
 
-  let filteredList = [];
+  let filteredList: TodoListType[] = [];
   if (category === "All") {
     filteredList = todoList;
   }
